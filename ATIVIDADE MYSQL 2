@@ -1,0 +1,91 @@
+-- 1. Criação do banco de dados e seleção do mesmo
+CREATE DATABASE loja_online;
+USE loja_online;
+
+-- 2. Criação da tabela 'produtos' com seus atributos
+CREATE TABLE produtos (
+    id INT AUTO_INCREMENT,
+    nome VARCHAR(225),
+    descricao TEXT,
+    preco DECIMAL(10,2),
+    categoria VARCHAR(50),
+    PRIMARY KEY(id)
+);
+
+-- 3. Explicação dos comandos SQL básicos
+-- Create: Utilizado para criar um novo banco de dados ou uma tabela dentro de um banco de dados.
+-- Alter: Utilizado para modificar a estrutura de uma tabela existente.
+-- Drop: Utilizado para excluir um banco de dados ou uma tabela.
+
+-- 4. Explicação dos tipos de dados SQL
+-- Int: Usado para armazenar números inteiros.
+-- Varchar: Usado para armazenar strings de comprimento variável.
+-- Char: Usado para armazenar strings de comprimento fixo.
+-- Date: Usado para armazenar datas (no formato 'YYYY-MM-DD').
+-- Float: Usado para armazenar números decimais.
+
+-- 5. Explicação das chaves no banco de dados
+-- Chave candidata: Colunas que podem ser escolhidas como chave primária.
+-- Chave primária simples: Coluna única escolhida como chave primária para garantir unicidade.
+-- Chave primária composta: Conjunto de colunas que, juntas, formam uma chave primária única.
+
+-- 6. Inserção de dados na tabela 'produtos'
+INSERT INTO produtos (nome, descricao, preco, categoria) VALUES 
+    ("Notebook A", "Ótimo para jogos, alta performance, nível avançado", 5000, "Eletrônicos"),
+    ("Notebook B", "Adequado para jogos, boa performance, nível intermediário", 2500, "Eletrônicos"),
+    ("Notebook C", "Não indicado para jogos, performance média, nível básico", 1500, "Eletrônicos"),
+    ("Sofá Grande", "Confortável e espaçoso", 2000, "Móveis"),
+    ("Sofá Médio", "Confortável e tamanho médio", 1900, "Móveis");
+
+-- 7. Seleção de todos os registros da tabela 'produtos'
+SELECT * FROM produtos;
+
+-- 8. Seleção de todos os produtos da categoria 'Eletrônicos'
+SELECT * FROM produtos WHERE categoria = "Eletrônicos";
+
+-- 9. Seleção de todos os produtos em ordem alfabética pelo nome
+SELECT * FROM produtos ORDER BY nome ASC;
+
+-- 10. Seleção dos três produtos mais caros
+SELECT * FROM produtos ORDER BY preco DESC LIMIT 3;
+
+-- 11. Atualização do preço de um produto específico
+UPDATE produtos SET preco = 59.99 WHERE id = 2;
+
+-- 12. Exclusão de um produto específico
+DELETE FROM produtos WHERE id = 4;
+
+-- 13. Explicação dos comandos Update e Delete
+-- Update: Usado para modificar valores específicos em uma tabela (o valor deve já estar registrado). Exemplo: questão 11.
+-- Delete: Usado para remover valores específicos de uma tabela (o valor deve já estar registrado). Exemplo: questão 12.
+
+-- 14. Comparação de operadores SQL
+-- = : igual a
+-- != : diferente de
+-- > : maior que
+-- < : menor que
+-- >= : maior ou igual a
+-- <= : menor ou igual a
+-- AND : todas as condições devem ser verdadeiras
+-- OR : pelo menos uma das condições deve ser verdadeira
+-- NOT : inverte o resultado
+-- SUM : calcula a soma
+-- AVG : calcula a média
+
+-- 16. Cálculo da média dos preços dos produtos
+SELECT AVG(preco) AS media_preco FROM produtos;
+
+-- 17. Contagem de produtos por categoria
+SELECT categoria, COUNT(*) AS total_produtos FROM produtos GROUP BY categoria;
+
+-- 18. Seleção do produto mais caro e do mais barato
+SELECT nome, preco AS maior_preco FROM produtos ORDER BY preco DESC LIMIT 1;
+SELECT nome, preco AS menor_preco FROM produtos ORDER BY preco ASC LIMIT 1;
+
+-- 19. Estatísticas por categoria
+SELECT categoria, COUNT(*) AS total_produtos, AVG(preco) AS preco_medio, MAX(preco) AS preco_maximo, SUM(preco) AS lucro_total 
+FROM produtos
+GROUP BY categoria;
+
+-- 20. Seleção de produtos com preço acima da média
+SELECT nome, preco FROM produtos WHERE preco > (SELECT AVG(preco) FROM produtos);
