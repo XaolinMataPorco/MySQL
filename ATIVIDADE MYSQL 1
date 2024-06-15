@@ -14,7 +14,7 @@ CREATE TABLE estudantes (
 INSERT INTO estudantes (nome, data_nascimento, curso, matricula) VALUES 
     ('Ryan', '2006-06-07', 'DS', 123),
     ('Renan', '2005-07-01', 'DS', 234),
-    ('Aléxia', '2005-10-02', 'Multimídia', 345);
+    ('Aléxia', '2005-10-02', 'Multimidia', 345);
 
 SELECT nome, matricula, data_nascimento FROM estudantes;
 
